@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!--Shiro 1.2或更高版本使用如下配置,该监听器会初始化一个WebEnvironment实例（包含了Shiro中需要执行的任何东西以及SecurityManager）
+        如果想要在任何时候都可以获取到WebEnvironment实例(实际上是创建的IniWebEnvironment实例,IniWebEnvironment对象读取的是/WEB-INF/shiro.ini文件)，
+        可以通过WebUtils.getRequiredWebEnvironment(servletContext)获取
+    -->
+    <!--如果需要通过自定义WebEnvironment来读取配置，可以将自定义的WebEnvironment设置到EnvironmentLoaderListener中-->
+    <!--<context-param>
+        <param-name>shiroEnvironmentClass</param-name>
+        <param-value>com.zhidi.shiro.MyWebEnvironment</param-value>
+    </context-param>-->
+    
+    <listener>
+        <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+    </listener>
+
+    <!--ShiroFilter会通过WebUtils.getRequiredWebEnvironment(servletContext)获取WebEnvironment实例，来执行所有必要的安全操作-->
+    <filter>
+        <filter-name>ShiroFilter</filter-name>
+        <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ShiroFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    
+    <!--Shiro 1.1或更早版本-->
+    <!--<MyFilter1>
+        <MyFilter1-name>iniShiroFilter</MyFilter1-name>
+        <MyFilter1-class>org.apache.shiro.web.servlet.IniShiroFilter</MyFilter1-class>
+        <init-param>
+            <param-name>configPath</param-name>
+            <param-value>classpath:xml/shiro.ini</param-value>
+        </init-param>
+    </MyFilter1>
+
+    <MyFilter1-mapping>
+        <MyFilter1-name>iniShiroFilter</MyFilter1-name>
+        <url-pattern>/*</url-pattern>
+    </MyFilter1-mapping>-->
+
+</web-app>
