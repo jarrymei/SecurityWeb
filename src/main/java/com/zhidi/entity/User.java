@@ -5,23 +5,22 @@ package com.zhidi.entity;
  */
 public class User {
 
-    private Integer id;
+    private String id;
     private String username;
     private String password;
     private String phone;
 
-    public User(Integer id, String username, String password, String phone) {
+    public User(String id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.phone = phone;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

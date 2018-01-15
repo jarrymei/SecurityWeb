@@ -18,11 +18,10 @@ public class LoginDao {
         ResultSet rs = ps.executeQuery();
         User user = null;
         while (rs.next()) {
-            Integer id = rs.getInt("id");
+            String id = rs.getString("user_id");
             String userName = rs.getString("user_name");
             String password = rs.getString("password");
-            String phone = rs.getString("phone");
-            user = new User(id, userName, password, phone);
+            user = new User(id, userName, password);
         }
         return user;
     }

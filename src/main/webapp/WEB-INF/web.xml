@@ -49,4 +49,8 @@
         <url-pattern>/*</url-pattern>
     </MyFilter1-mapping>-->
 
+    <!--设置Session超时时间-->
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
 </web-app>

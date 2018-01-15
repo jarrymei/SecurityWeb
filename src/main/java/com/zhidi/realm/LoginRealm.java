@@ -12,6 +12,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/1/14/014.
@@ -20,7 +22,21 @@ public class LoginRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+
+        String username = String.valueOf(principalCollection.getPrimaryPrincipal());
+
+        List<String> permissions = new ArrayList<String>();
+        permissions.add("user:*");
+
+        List<String> roles = new ArrayList<String>();
+        roles.add("sysadmin");
+
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addStringPermissions(permissions);
+
+        info.addRoles(roles);
+
+        return info;
     }
 
     @Override
